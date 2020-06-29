@@ -16,12 +16,14 @@
         if(!empty($estudiante)){
             $lastElem = getLast($estudiante);
 
-            $idestudiante = $lastElem['id'] + 1;
+            $idEstudiante = $lastElem['id'] + 1;
         }
 
         array_push($estudiante , ['id' => $idEstudiante, 'nombre' => $_POST['nombre'], 'apellido' => $_POST['apellido'], 'estado' => $_POST['estado'], 'carrera' => $_POST['carrera']]);
 
         $_SESSION['estudiante'] = $estudiante;
+
+        
 
         header("Location: ../index.php");
         exit();
@@ -45,11 +47,11 @@
                 <form action="registro.php" method="POST">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
+                        <input required type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
                     </div>
                     <div class="form-group">
                         <label for="apellido">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido">
+                        <input required type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido">
                     </div>
                     <div class="form-group">
                         <label for="estado">Estado</label></br>

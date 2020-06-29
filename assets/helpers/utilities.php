@@ -20,4 +20,16 @@ function filtro($list, $filtro, $value){
     return $filter;
 
 }
+function buscarID($list, $filtro, $value){
+
+    $index = 0;
+    foreach($list as $key => $item){
+        if($item[$filtro] == $value){
+            $index = $key;
+        }
+    }
+
+    return $index;
+
+}
 ?>

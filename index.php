@@ -70,8 +70,8 @@
                   <p class="card-text"> Carrera: <?php echo $student['carrera']?> </p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-primary">Editar</button>
-                      <button type="button" class="btn btn-sm btn-danger">Borrar</button>
+                      <a type="button" href="assets/editar.php?id=<?php echo $student['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
+                      <a type="button" href="assets/borrar.php?id=<?php echo $student['id'] ?>" class="btn btn-sm btn-danger">Borrar</a>
                     </div>
                   </div>
                 </div>
