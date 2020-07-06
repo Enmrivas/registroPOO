@@ -1,35 +1,47 @@
 <?php
 
-function getLast($list){
-    $countList = count($list);
-    $lastElem = $list[$countList - 1];
+class Utilities{
 
-    return $lastElem;
-}
-
-
-function filtro($list, $filtro, $value){
-
-    $filter = [];
-    foreach($list as $item){
-        if($item[$filtro] == $value){
-            array_push($filter, $item);
+    public function getLast($list){
+        $countList = count($list);
+        $lastElem = $list[$countList - 1];
+    
+        return $lastElem;
+    }
+    
+    
+    public function filtro($list, $filtro, $value){
+    
+        $filter = [];
+        foreach($list as $item){
+            if($item->$filtro == $value){
+                array_push($filter, $item);
+            }
         }
+    
+        return $filter;
+    
     }
 
-    return $filter;
-
-}
-function buscarID($list, $filtro, $value){
-
-    $index = 0;
-    foreach($list as $key => $item){
-        if($item[$filtro] == $value){
-            $index = $key;
-        }
+    public function GetCookieTime(){
+        return time() + 60*60*24*30;
     }
 
-    return $index;
+    public function buscarID($list, $filtro, $value){
+    
+        $index = 0;
+        foreach($list as $key => $item){
+            if($item->$filtro == $value){
+                $index = $key;
+            }
+        }
+    
+        return $index;
+    
+    }
+
 
 }
+
+
 ?>

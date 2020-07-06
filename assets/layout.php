@@ -1,6 +1,8 @@
 <?php 
 
-function printNavBar(){
+class Layout{
+
+  public function printNavBar(){
     $header = <<<EOF
 
     <html lang="en"><head>
@@ -32,7 +34,7 @@ echo $header;
 }
 
 
-function printFoot(){
+public function printFoot(){
 
     $footer = <<<EOF
  
@@ -51,5 +53,9 @@ EOF;
 echo $footer;
 
 }
+
+}
+
+
 
 ?>
