@@ -48,7 +48,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="editar.php?id=<?php echo $element->id ?>" method="POST">
+                <form enctype="multipart/form-data" action="editar.php?id=<?php echo $element->id ?>" method="POST">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input type="text" value="<?php echo $element->nombre ?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
