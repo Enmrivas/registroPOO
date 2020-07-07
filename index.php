@@ -67,6 +67,7 @@
 
               <div class="col-md-4">
               <div class="card mb-2 shadow-sm">
+              <img class="card-img-top" src="..." alt="Card image cap">
                 <div class="card-body">
                   <p class="card-text"> Nombre: <?php echo $student->nombre ?> </p>
                   <p class="card-text"> Apellido: <?php echo $student->apellido ?> </p>

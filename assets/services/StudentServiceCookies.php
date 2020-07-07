@@ -8,7 +8,6 @@ class StudentServiceCookie implements IServiceBase{
     public function __construct(){
 
         $this->utilities = new Utilities();
-
         $this->cookieName = "estudiante";
 
     }
@@ -45,7 +44,6 @@ class StudentServiceCookie implements IServiceBase{
     public function Add($entidad){
 
         $listStudent = $this->GetList();
-
         $estudianteID = 1;
 
         if(!empty($listStudent)){
@@ -54,6 +52,32 @@ class StudentServiceCookie implements IServiceBase{
         }
 
         $entidad->id = $estudianteID;
+        $entidad->fotoPerfil = "";
+
+        if(isset($_FILES['fotoPerfil'])){
+
+            $fotoFile = $_FILES['fotoPerfil'];
+
+            if($fotoFile['error'] == 4){
+
+                $entidad->fotoPerfil = "";
+
+            }else{
+
+                $typeReplace = str_replace("image/", "", $fotoFile['type']); 
+                $type = $fotoFile['type'];
+                $size = $fotoFile['size'];
+                $nombre = $estudianteID . '.' . $typeReplace;
+                $tmpFile = $fotoFile['tmp_name'];
+
+                $success = $this->utilities->agregarImagen('image/estudiantes/', $nombre, $tmpFile, $type, $size);
+
+                if($success){
+                    $entidad->fotoPerfil = $nombre;
+                }
+            }
+
+        }
 
         array_push($listStudent, $entidad);
 
@@ -67,6 +91,32 @@ class StudentServiceCookie implements IServiceBase{
         $listStudent = $this->GetList();
 
         $elementIndex = $this->utilities->buscarID($listStudent, 'id', $id);
+
+        if(isset($_FILES['fotoPerfil'])){
+
+            $fotoFile = $_FILES['fotoPerfil'];
+
+            if($fotoFile['error'] == 4){
+
+                $entidad->fotoPerfil = $element->fotoPerfil;
+
+            }else{
+                $typeReplace = str_replace("image/", "", $fotoFile['type']); 
+                $type = $fotoFile['type'];
+                $size = $fotoFile['size'];
+                $nombre = $id . '.' . $typeReplace;
+                $tmpFile = $fotoFile['tmp_name'];
+    
+                $success = $this->utilities->agregarImagen('image/estudiantes/', $nombre, $tmpFile, $type, $size);
+    
+                if($success){
+                    $entidad->fotoPerfil = $nombre;
+                }
+            }
+
+            
+
+        }
 
         $listStudent[$elementIndex] = $entidad;
 

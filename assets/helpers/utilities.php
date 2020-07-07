@@ -40,7 +40,44 @@ class Utilities{
     
     }
 
+    public function agregarImagen($directorio, $nombre, $tmpFile, $type, $size){
 
+        $success = false;
+
+        if(($type == "image/gif") || ($type == "image/jpg") || ($type == "image/jpeg") || ($type == "image/png") || ($type == "image/JPG") || ($type == "image/pjpeg") && ($size < 1000000) ){
+
+            if(!file_exists($directorio)){
+                
+                mkdir($directorio, 0777, true);
+
+                if(file_exists($directorio)){
+
+                    $this->uploadFile($directorio . $name, $tmpFile);
+                    $success = true;
+
+                }
+
+            }else {
+
+                $this->uploadFile($name, $tmpFile);
+                $success = true;
+
+            }
+
+        }else{
+            $success = false;
+        }
+
+        return $success;
+    }
+
+    private function uploadFile($name, $tmpFile){
+        if(file_exists($nombre)){
+            unlink($name);
+        }
+
+        move_uploaded_file($tmpFile, $name);
+    }
 }
 
 

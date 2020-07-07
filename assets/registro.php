@@ -11,7 +11,7 @@
     
 
 
-    if(isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['estado']) && isset($_POST['carrera']) && isset($_POST['materiaFav'])){
+    if(isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['estado']) && isset($_POST['carrera']) && isset($_POST['materiaFav']) && isset($_FILES['fotoPerfil']) ){
 
         $newStudent = new Student();
 
@@ -39,7 +39,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="registro.php" method="POST">
+                <form enctype="multipart/form-data" action="registro.php" method="POST">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input required type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
@@ -71,6 +71,10 @@
                     <div class="form-group">
                         <label for="materiaFav">Materia Favorita</label>
                         <input required type="text" class="form-control" id="materiaFav" name="materiaFav" placeholder="Materia Favorita">
+                    </div>
+                    <div class="form-group">
+                        <label for="fotoPerfil">Foto del Estudiante</label>
+                        <input required type="file" class="form-control" id="fotoPerfil" name="fotoPerfil" placeholder="Materia Favorita">
                     </div>
                     <button class="btn btn-primary" style="float: right; margin-top: 2%;" type="submit">Enviar</button>
                 </form>
