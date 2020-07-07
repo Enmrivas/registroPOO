@@ -52,14 +52,14 @@ class Utilities{
 
                 if(file_exists($directorio)){
 
-                    $this->uploadFile($directorio . $name, $tmpFile);
+                    $this->uploadFile($directorio . $nombre, $tmpFile);
                     $success = true;
 
                 }
 
             }else {
 
-                $this->uploadFile($name, $tmpFile);
+                $this->uploadFile($nombre, $tmpFile);
                 $success = true;
 
             }
@@ -71,12 +71,12 @@ class Utilities{
         return $success;
     }
 
-    private function uploadFile($name, $tmpFile){
+    private function uploadFile($nombre, $tmpFile){
         if(file_exists($nombre)){
-            unlink($name);
+            unlink($nombre);
         }
 
-        move_uploaded_file($tmpFile, $name);
+        move_uploaded_file($tmpFile, $nombre);
     }
 }
 

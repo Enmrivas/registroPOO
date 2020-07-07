@@ -15,6 +15,8 @@
 
         $newStudent = new Student();
 
+        
+
         $newStudent->initializeData(0, $_POST['nombre'], $_POST['apellido'], $_POST['estado'], $_POST['carrera'], $_POST['materiaFav']);
 
         $service->Add($newStudent);
@@ -73,8 +75,8 @@
                         <input required type="text" class="form-control" id="materiaFav" name="materiaFav" placeholder="Materia Favorita">
                     </div>
                     <div class="form-group">
-                        <label for="fotoPerfil">Foto del Estudiante</label>
-                        <input required type="file" class="form-control" id="fotoPerfil" name="fotoPerfil" placeholder="Materia Favorita">
+                        <label for="foto">Foto del Estudiante</label>
+                        <input type="file" class="form-control" id="foto" name="fotoPerfil" placeholder="Foto del estudiante">
                     </div>
                     <button class="btn btn-primary" style="float: right; margin-top: 2%;" type="submit">Enviar</button>
                 </form>

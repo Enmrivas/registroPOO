@@ -81,6 +81,10 @@
                         <label for="materiaFav">Materia Favorita</label>
                         <input required type="text" value="<?php echo $element->materiaFav ?>" class="form-control" id="materiaFav" name="materiaFav" placeholder="Materia Favorita">
                     </div>
+                    <div class="form-group">
+                        <label for="foto">Foto del Estudiante</label>
+                        <input type="file" class="form-control" id="foto" name="fotoPerfil" placeholder="Foto del estudiante">
+                    </div>
                     <button class="btn btn-primary" style="float: right; margin-top: 2%;" type="submit">Enviar</button>
                 </form>
             </div>

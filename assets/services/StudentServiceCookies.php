@@ -48,7 +48,7 @@ class StudentServiceCookie implements IServiceBase{
 
         if(!empty($listStudent)){
             $lastStudent = $this->utilities->getLast($listStudent);
-            $estudianteID = $lastStudent->$id + 1;
+            $estudianteID = $lastStudent->id + 1;
         }
 
         $entidad->id = $estudianteID;
@@ -59,18 +59,16 @@ class StudentServiceCookie implements IServiceBase{
             $fotoFile = $_FILES['fotoPerfil'];
 
             if($fotoFile['error'] == 4){
-
                 $entidad->fotoPerfil = "";
-
             }else{
 
-                $typeReplace = str_replace("image/", "", $fotoFile['type']); 
+                $typeReplace = str_replace("image/", "", $_FILES['fotoPerfil']['type']); 
                 $type = $fotoFile['type'];
                 $size = $fotoFile['size'];
                 $nombre = $estudianteID . '.' . $typeReplace;
-                $tmpFile = $fotoFile['tmp_name'];
+                $tmpname = $fotoFile['tmp_name'];
 
-                $success = $this->utilities->agregarImagen('image/estudiantes/', $nombre, $tmpFile, $type, $size);
+                $success = $this->utilities->agregarImagen('../image/estudiantes/', $nombre, $tmpname, $type, $size);
 
                 if($success){
                     $entidad->fotoPerfil = $nombre;
@@ -107,7 +105,7 @@ class StudentServiceCookie implements IServiceBase{
                 $nombre = $id . '.' . $typeReplace;
                 $tmpFile = $fotoFile['tmp_name'];
     
-                $success = $this->utilities->agregarImagen('image/estudiantes/', $nombre, $tmpFile, $type, $size);
+                $success = $this->utilities->agregarImagen('../image/estudiantes/', $nombre, $tmpFile, $type, $size);
     
                 if($success){
                     $entidad->fotoPerfil = $nombre;
