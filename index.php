@@ -1,23 +1,27 @@
 <?php 
- include 'assets/layout.php';
- include 'assets/helpers/utilities.php';
+ require_once 'assets/layout.php';
+ require_once 'assets/helpers/utilities.php';
+ require_once 'assets/student.php';
+ require_once 'assets/services/IServiceBase.php';
+ require_once 'assets/services/StudentServiceCookies.php';
+ 
+ $layout = new Layout();
+ $utilities = new Utilities();
+ $service = new StudentServiceCookie();
 
- session_start();
 
- $_SESSION['estudiante'] = isset($_SESSION['estudiante']) ? $_SESSION['estudiante'] : array();
-
- $listEstudiante = $_SESSION['estudiante'];
+ $listEstudiante = $service->GetList();
 
  if (!empty($listEstudiante)){
    if(isset($_GET['carrera'])){
-     $listEstudiante = filtro($listEstudiante, 'carrera', $_GET['carrera']);
+     $listEstudiante = $utilities->filtro($listEstudiante, 'carrera', $_GET['carrera']);
    }
  }
 
 ?>
 
 
-<?php printNavBar();?>
+<?php $layout->printNavBar();?>
 
 <main role="main">
 
@@ -64,14 +68,15 @@
               <div class="col-md-4">
               <div class="card mb-2 shadow-sm">
                 <div class="card-body">
-                  <p class="card-text"> Nombre: <?php echo $student['nombre'] ?> </p>
-                  <p class="card-text"> Apellido: <?php echo $student['apellido'] ?> </p>
-                  <p class="card-text"> Estado: <?php echo $student['estado']?> </p>
-                  <p class="card-text"> Carrera: <?php echo $student['carrera']?> </p>
+                  <p class="card-text"> Nombre: <?php echo $student->nombre ?> </p>
+                  <p class="card-text"> Apellido: <?php echo $student->apellido ?> </p>
+                  <p class="card-text"> Estado: <?php echo $student->estado?> </p>
+                  <p class="card-text"> Carrera: <?php echo $student->carrera?> </p>
+                  <p class="card-text"> Materia favorita: <?php echo $student->materiaFav?> </p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a type="button" href="assets/editar.php?id=<?php echo $student['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
-                      <a type="button" href="assets/borrar.php?id=<?php echo $student['id'] ?>" class="btn btn-sm btn-danger">Borrar</a>
+                      <a type="button" href="assets/editar.php?id=<?php echo $student->id ?>" class="btn btn-sm btn-primary">Editar</a>
+                      <a type="button" href="assets/borrar.php?id=<?php echo $student->id ?>" class="btn btn-sm btn-danger">Borrar</a>
                     </div>
                   </div>
                 </div>
@@ -95,4 +100,4 @@
 
 </main>
 
-<?php printFoot();?>
+<?php $layout->printFoot();?>

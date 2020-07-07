@@ -1,19 +1,17 @@
 <?php
+    require_once 'helpers/utilities.php';
+    require_once 'student.php';
+    require_once 'services/IServiceBase.php';
+    require_once 'services/StudentServiceCookies.php';
 
-    include 'helpers/utilities.php';
+    $service = new StudentServiceCookie();
 
-    session_start();
+    $containsId = isset($_GET['id']);
 
-    $estudiante = $_SESSION['estudiante'];
-
-    if(isset($_GET['id'])){
+    if($containsId){
         $idStudent = $_GET['id'];
 
-        $elementIndex = buscarID($estudiante, 'id', $idStudent);
-
-        unset($estudiante[$elementIndex]);
-
-        $_SESSION['estudiante'] = $estudiante;
+        $service->Delete($idStudent);
 
     }
 

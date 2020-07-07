@@ -1,29 +1,24 @@
 <?php 
-    include 'layout.php';
-    include 'helpers/utilities.php';
-
-    session_start();
+    require_once 'layout.php';
+    require_once 'helpers/utilities.php';
+    require_once 'student.php';
+    require_once 'services/IServiceBase.php';
+    require_once 'services/StudentServiceCookies.php';
 
     
-    if(isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['estado']) && isset($_POST['carrera'])){
+    $layout = new Layout();
+    $service = new StudentServiceCookie();
+    
 
-        $_SESSION['estudiante'] = isset($_SESSION['estudiante']) ? $_SESSION['estudiante'] : array();
 
-        $estudiante = $_SESSION['estudiante'];
+    if(isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['estado']) && isset($_POST['carrera']) && isset($_POST['materiaFav'])){
 
-        $idEstudiante = 1;
+        $newStudent = new Student();
 
-        if(!empty($estudiante)){
-            $lastElem = getLast($estudiante);
+        $newStudent->initializeData(0, $_POST['nombre'], $_POST['apellido'], $_POST['estado'], $_POST['carrera'], $_POST['materiaFav']);
 
-            $idEstudiante = $lastElem['id'] + 1;
-        }
+        $service->Add($newStudent);
 
-        array_push($estudiante , ['id' => $idEstudiante, 'nombre' => $_POST['nombre'], 'apellido' => $_POST['apellido'], 'estado' => $_POST['estado'], 'carrera' => $_POST['carrera']]);
-
-        $_SESSION['estudiante'] = $estudiante;
-
-        
 
         header("Location: ../index.php");
         exit();
@@ -33,7 +28,7 @@
 ?>
 
 
-<?php printNavBar();?>
+<?php $layout->printNavBar();?>
 <div class="container">
     <a href="../index.php" class="btn btn-secondary" style="margin-top: 1%">Volver</a>
 </div>
@@ -73,6 +68,10 @@
                             <option>Seguridad Informatica</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="materiaFav">Materia Favorita</label>
+                        <input required type="text" class="form-control" id="materiaFav" name="materiaFav" placeholder="Materia Favorita">
+                    </div>
                     <button class="btn btn-primary" style="float: right; margin-top: 2%;" type="submit">Enviar</button>
                 </form>
             </div>
@@ -82,4 +81,4 @@
 
 </main>
 
-<?php printFoot();?>
+<?php $layout->printFoot();?>

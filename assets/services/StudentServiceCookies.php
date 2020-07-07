@@ -32,7 +32,7 @@ class StudentServiceCookie implements IServiceBase{
     public function GetById($id){
 
         $listStudent = $this->GetList();
-        $elementDecode = $this->utilities->searchProperty($listStudent, 'id', $id)[0];
+        $elementDecode = $this->utilities->filtro($listStudent, 'id', $id)[0];
         $estudiante = new Student();
 
         $estudiante->set($elementDecode);
@@ -72,6 +72,18 @@ class StudentServiceCookie implements IServiceBase{
 
         setcookie($this->cookieName, json_encode($listStudent), $this->utilities->GetCookieTime(), "/");
 
+    }
+
+    public function Delete($id){
+
+        $listStudent = $this->GetList();
+        $elementIndex = $this->utilities->buscarID($listStudent, 'id', $id);
+
+        unset($listStudent[$elementIndex]);
+
+        $listStudent = array_values($listStudent);
+
+        setcookie($this->cookieName, json_encode($listStudent), $this->utilities->GetCookieTime(), "/");
     }
 
 }
